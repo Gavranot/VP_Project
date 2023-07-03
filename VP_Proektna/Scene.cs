@@ -8,5 +8,6 @@ namespace VP_Proektna
 {
     internal class Scene
     {
+        public int sceneNumber { get; set; }
     }
 }
