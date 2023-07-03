@@ -63,6 +63,76 @@ namespace VP_Proektna.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ambulance_png {
+            get {
+                object obj = ResourceManager.GetObject("ambulance_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cargreen_png {
+            get {
+                object obj = ResourceManager.GetObject("cargreen_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cargrey_png {
+            get {
+                object obj = ResourceManager.GetObject("cargrey_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap carorange {
+            get {
+                object obj = ResourceManager.GetObject("carorange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap carpink_png {
+            get {
+                object obj = ResourceManager.GetObject("carpink_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap carred_png {
+            get {
+                object obj = ResourceManager.GetObject("carred_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap raceTrack {
+            get {
+                object obj = ResourceManager.GetObject("raceTrack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap racing_car {
             get {
                 object obj = ResourceManager.GetObject("racing car", resourceCulture);
@@ -86,6 +156,26 @@ namespace VP_Proektna.Properties {
         internal static System.Drawing.Bitmap sound_icon_resized {
             get {
                 object obj = ResourceManager.GetObject("sound icon resized", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap truckblue_png {
+            get {
+                object obj = ResourceManager.GetObject("truckblue_png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap truckwhite_png {
+            get {
+                object obj = ResourceManager.GetObject("truckwhite_png", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

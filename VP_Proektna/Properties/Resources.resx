@@ -127,4 +127,31 @@
   <data name="sound icon resized" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sound icon resized.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ambulance_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ambulance-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cargreen_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cargreen-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cargrey_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cargrey-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="carorange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\carorange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="carpink_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\carpink-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="carred_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\carred-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="raceTrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\raceTrack.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="truckblue_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\truckblue-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="truckwhite_png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\truckwhite-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

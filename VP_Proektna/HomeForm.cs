@@ -14,7 +14,7 @@ namespace VP_Proektna
 {
     public partial class HomeForm : Form
     {
-        public SoundPlayer Player { get; set; } = new SoundPlayer(@"C:\Users\marija\Desktop\vp_proektna\VP_Project\VP_Proektna\Resources\onlymp3.to - GTA San Andreas Theme Song Full -W4VTq0sa9yg-192k-1688314322.wav");
+        public SoundPlayer Player { get; set; } = new SoundPlayer(@"../../Resources/RacingAudio.wav");
         public bool IsSoundOn { get; set; } = true;
 
         public HomeForm()
@@ -59,7 +59,7 @@ namespace VP_Proektna
             else
             {
                 Player.Stop();
-                btnSound.Image = Image.FromFile("")
+                btnSound.Image = Image.FromFile("../../Resources/sound icon resized.jpg");
             }
         }
 
@@ -72,7 +72,8 @@ namespace VP_Proektna
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            
+            CarPickForm carPickForm = new CarPickForm();
+            carPickForm.ShowDialog();
         }
 
         private void btnContinueGame_Click(object sender, EventArgs e)

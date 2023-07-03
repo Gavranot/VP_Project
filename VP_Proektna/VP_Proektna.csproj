@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarPickForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CarPickForm.Designer.cs">
+      <DependentUpon>CarPickForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameSceneForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CarPickForm.resx">
+      <DependentUpon>CarPickForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameSceneForm.resx">
       <DependentUpon>GameSceneForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +115,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sound icon resized.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ambulance-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cargreen-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cargrey-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carpink-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carred-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truckblue-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truckwhite-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carorange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\raceTrack.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
