@@ -9,5 +9,6 @@ namespace VP_Proektna
     internal class Scene
     {
         public int sceneNumber { get; set; }
+        public string sceneName { get; set; }
     }
 }
