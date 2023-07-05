@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lbTimer = new System.Windows.Forms.Label();
             this.countDownTimer = new System.Windows.Forms.Timer(this.components);
             this.lbCountDown = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -38,17 +37,6 @@
             this.raceTimer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lbTimer
-            // 
-            this.lbTimer.AutoSize = true;
-            this.lbTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTimer.Location = new System.Drawing.Point(323, 497);
-            this.lbTimer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbTimer.Name = "lbTimer";
-            this.lbTimer.Size = new System.Drawing.Size(306, 39);
-            this.lbTimer.TabIndex = 2;
-            this.lbTimer.Text = "Current time: 00:00";
             // 
             // countDownTimer
             // 
@@ -107,7 +95,6 @@
             this.ClientSize = new System.Drawing.Size(822, 793);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lbCountDown);
-            this.Controls.Add(this.lbTimer);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "GameSceneForm";
@@ -124,7 +111,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lbTimer;
         private System.Windows.Forms.Timer countDownTimer;
         private System.Windows.Forms.Label lbCountDown;
         private System.Windows.Forms.StatusStrip statusStrip1;

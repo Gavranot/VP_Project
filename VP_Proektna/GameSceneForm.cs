@@ -17,8 +17,10 @@ namespace VP_Proektna
         String playerCar { get; set; }
         List<String> carPaths;
         Random aiCarSelector = new Random();
+        Random speedSelector = new Random();
         int timerCounter = 2; //se koristi i za dvata tamjeri bidejki se nezavisni  eden od drug       
-
+        public static int MIN_SPEED { get; set; } = 10;
+        public static int MAX_SPEED { get; set; } = 20;
 
 
         public GameSceneForm(String playerCar, List<String> carPaths)
@@ -28,7 +30,11 @@ namespace VP_Proektna
 
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
-            Scene = new Scene(this.Width, this.Height);
+            Scene = new Scene(this.Width, this.Height, 
+                speedSelector.Next(MIN_SPEED, MAX_SPEED),
+                speedSelector.Next(MIN_SPEED, MAX_SPEED),
+                speedSelector.Next(MIN_SPEED, MAX_SPEED)
+                );
 
             this.playerCar = playerCar;
             this.carPaths = carPaths;

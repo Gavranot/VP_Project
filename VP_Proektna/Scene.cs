@@ -13,38 +13,40 @@ namespace VP_Proektna
         public Opponent Left { get; set; }
         public Opponent Right { get; set; }
 
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public static int Width { get; set; }
+        public static int Height { get; set; }
 
 
 
         public bool IsPaused { get; set; } = true;
 
-        Random random = new Random();
-
-        public static int MIN_SPEED { get; set; } = 10;
-        public static int MAX_SPEED { get; set; } = 20;
+        public int PlayerSpeed { get; set; }
+        public int LeftSpeed { get; set; }
+        public int RightSpeed { get; set; }
         public static int DISTANCE_FROM_BOTTOM { get; set; } = 100;
 
-        public Scene(int width, int height)
+        public Scene(int width, int height, int playerSpeed, int leftSpeed, int rightSpeed)
         {
             Width = width;
             Height = height;
+            PlayerSpeed = playerSpeed;
+            LeftSpeed = leftSpeed;  
+            RightSpeed = rightSpeed;
         }
 
         public void CreatePlayer(String playerImagePath)
         {
-            Player = new Player(playerImagePath, new Point(3 * Width/7, Height - DISTANCE_FROM_BOTTOM), random.Next(MIN_SPEED, MAX_SPEED));
+            Player = new Player(playerImagePath, new Point(3 * Width/7, Height - DISTANCE_FROM_BOTTOM), PlayerSpeed);
         }
 
         public void CreateLeftOpponenet(String leftOpponentImagePath)
         {
-            Left = new Opponent(leftOpponentImagePath, new Point(Width/7, Height - DISTANCE_FROM_BOTTOM), random.Next(MIN_SPEED, MAX_SPEED));
+            Left = new Opponent(leftOpponentImagePath, new Point(Width/7, Height - DISTANCE_FROM_BOTTOM), LeftSpeed);
         }
 
         public void CreateRightOpponenet(String rightOpponentImagePath)
         {
-            Right = new Opponent(rightOpponentImagePath, new Point(5 * Width/7, Height - DISTANCE_FROM_BOTTOM), random.Next(MIN_SPEED, MAX_SPEED));
+            Right = new Opponent(rightOpponentImagePath, new Point(5 * Width/7, Height - DISTANCE_FROM_BOTTOM), RightSpeed);
         }
 
         public void Draw(Graphics g)
