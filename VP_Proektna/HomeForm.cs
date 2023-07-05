@@ -72,8 +72,10 @@ namespace VP_Proektna
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
+            this.Hide();
             CarPickForm carPickForm = new CarPickForm();
             carPickForm.ShowDialog();
+            this.Close();
         }
 
         private void btnContinueGame_Click(object sender, EventArgs e)

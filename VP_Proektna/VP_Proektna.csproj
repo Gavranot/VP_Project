@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Car.cs" />
     <Compile Include="CarPickForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,8 +71,11 @@
     <Compile Include="HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Opponent.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scene.cs" />
     <EmbeddedResource Include="CarPickForm.resx">
       <DependentUpon>CarPickForm.cs</DependentUpon>
     </EmbeddedResource>

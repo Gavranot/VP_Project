@@ -15,6 +15,7 @@ namespace VP_Proektna
         List<String> carImagePaths;
         int currIndex;
         public String selectedCar;
+
         public CarPickForm()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace VP_Proektna
                 carImagePaths.Add(@"../../Resources/" + carNames[i] + ".png");
             }
             currIndex = 0;
+            
         }
 
         private void CarPickForm_Load(object sender, EventArgs e)
@@ -69,9 +71,10 @@ namespace VP_Proektna
         private void btnChoose_Click(object sender, EventArgs e)
         {
             selectedCar = carImagePaths[currIndex];
-            this.Close();
+            this.Hide();
             GameSceneForm gameSceneForm = new GameSceneForm(selectedCar, carImagePaths);
             gameSceneForm.ShowDialog();
+            this.Close();
         }
     }
 }
