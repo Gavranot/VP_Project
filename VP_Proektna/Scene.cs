@@ -4,9 +4,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VP_Proektna
 {
+    [Serializable]
     public class Scene
     {
         public Player Player { get; set; }
@@ -25,6 +27,9 @@ namespace VP_Proektna
         public int RightSpeed { get; set; }
         public static int DISTANCE_FROM_BOTTOM { get; set; } = 100;
 
+        public Random moveAI {  get; set; } = new Random();
+
+
         public Scene(int width, int height, int playerSpeed, int leftSpeed, int rightSpeed)
         {
             Width = width;
@@ -32,7 +37,10 @@ namespace VP_Proektna
             PlayerSpeed = playerSpeed;
             LeftSpeed = leftSpeed;  
             RightSpeed = rightSpeed;
+            Console.WriteLine($"Height: {height}");
         }
+
+       
 
         public void CreatePlayer(String playerImagePath)
         {
@@ -64,7 +72,7 @@ namespace VP_Proektna
 
         public void MoveOpponenets()
         {
-
+            Console.WriteLine($"Opponents speeds : {LeftSpeed} and {RightSpeed}");
             if (!IsPaused)
             {
                 Left.MoveUp();
@@ -72,16 +80,46 @@ namespace VP_Proektna
             }
         }
 
-        public void MovePlayer(int direction)
+        public void UpdatePlayerSpeed(int newSpeed)
         {
+            PlayerSpeed = newSpeed;
+            Player.Speed = newSpeed;
+        }
+
+        public void UpdateLeftOpponentSpeed(int newSpeed)
+        {
+            Left.Speed = newSpeed;
+            LeftSpeed = newSpeed;
+        }
+
+        public void UpdateRightOpponentSpeed(int newSpeed)
+        {
+            Right.Speed = newSpeed;
+            RightSpeed = newSpeed;
+        }
+
+        public void MovePlayer(KeyEventArgs keyDown)
+        {
+            Console.WriteLine($"Player speed: {PlayerSpeed}");
+
             if(!IsPaused)
             {
-                switch (direction)
-                {
-                    case 0: Player.MoveUp(); break;
-                    case 1: Player.MoveLeft(); break;
-                    case 2: Player.MoveRight(); break;
-                }
+              
+                
+                    if (keyDown.KeyCode == Keys.Up)
+                    {
+                        Player.MoveUp();
+                    }
+                    else if (keyDown.KeyCode == Keys.Left)
+                    {
+                        Player.OvertakeLeft();
+                    }
+                    else if (keyDown.KeyCode == Keys.Right)
+                    {
+                        Player.OvertakeRight();
+                    }
+                
+              
             }
             
         }

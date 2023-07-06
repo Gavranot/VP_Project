@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace VP_Proektna
 {
+    [Serializable]
     public class Car
     {
         public String ImagePath { get; set; }

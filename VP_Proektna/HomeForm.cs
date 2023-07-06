@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -80,7 +81,14 @@ namespace VP_Proektna
 
         private void btnContinueGame_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Continue your game!";
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open);
+                GameSceneForm continued = new GameSceneForm(fs);
+                continued.ShowDialog();
+            }
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
