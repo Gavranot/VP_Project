@@ -18,6 +18,9 @@ namespace VP_Proektna
         public Point Location { get; set; }
         public int Speed { get; set; }
 
+        public Rectangle hitBox { get; set; }   
+
+
         public static int NUM_ROUNDS { get; set; } = 6;
         public int Round { get; set; } = 1;
         public bool IsFinished { get; set; } = false;
@@ -29,11 +32,13 @@ namespace VP_Proektna
             Image = new Bitmap(ImagePath);
             Location = location;
             Speed = speed;
+            
         }
 
         public void Draw(Graphics g)
         {
             Rectangle rectangle = new Rectangle(Location.X, Location.Y - Image.Height, Image.Width, Image.Height);
+            hitBox = rectangle;
             TextureBrush brush = new TextureBrush(Image);
             brush.TranslateTransform(Location.X, Location.Y - Image.Height);
  
@@ -43,6 +48,7 @@ namespace VP_Proektna
 
         public void MoveUp()
         {
+            Console.WriteLine($"Car: {ImagePath}, Speed : {Speed}");
             if(Round == NUM_ROUNDS + 1)
             {
                 IsFinished = true;
@@ -58,6 +64,8 @@ namespace VP_Proektna
                 }
             }          
         }
+
+       
 
     }
 }

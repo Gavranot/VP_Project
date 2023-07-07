@@ -46,13 +46,20 @@ namespace VP_Proektna
 
             this.playerCar = playerCar;
             this.carPaths = carPaths;
+            Scene.PlayerPath = playerCar;
+            Scene.carPaths = carPaths;
 
             countDownTimer.Start();
         }
 
         public GameSceneForm(FileStream fs) {
+            InitializeComponent();
+            DoubleBuffered = true;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
             IFormatter formatter = new BinaryFormatter();
             Scene = (Scene)formatter.Deserialize(fs);
+            this.playerCar = Scene.PlayerPath;
+            this.carPaths = Scene.carPaths;
             Invalidate();
         }
 
@@ -116,7 +123,7 @@ namespace VP_Proektna
                 {
                     if(Scene.Left.Speed < MAX_SPEED)
                     {
-                        Scene.UpdateLeftOpponentSpeed(Scene.LeftSpeed + speedSelector.Next(1, 5));
+                        Scene.UpdateLeftOpponentSpeed(Scene.Left.Speed + speedSelector.Next(1, 4));
                     }
                    
                 }
@@ -124,10 +131,11 @@ namespace VP_Proektna
                 {
                     if(Scene.Right.Speed < MAX_SPEED)
                     {
-                        Scene.UpdateRightOpponentSpeed(Scene.RightSpeed + speedSelector.Next(1, 5));
+                        Scene.UpdateRightOpponentSpeed(Scene.Right.Speed + speedSelector.Next(1, 4));
                     }
                     
                 }
+                
             }
 
             int minutes = timerCounter / 60;          
@@ -144,9 +152,14 @@ namespace VP_Proektna
                 int newSpeed = Scene.PlayerSpeed -= 2;
                 Scene.UpdatePlayerSpeed(newSpeed);
             }
+            bool swerve = false;
+            if (speedSelector.Next(0, 50) >= 38)
+            {
+                swerve = true;
+            }
 
             Scene.PauseOrStart();
-            Scene.MoveOpponenets();
+            Scene.MoveOpponenets(swerve);
             Invalidate();
         }
 
@@ -179,8 +192,16 @@ namespace VP_Proektna
             {
                 isRightPressed = true;
             }
-            Scene.MovePlayer(e);
-
+            bool check = Scene.MovePlayer(e);
+            if(check == true)
+            {
+                lbCountDown.Show();
+                lbCountDown.Text = "Game over!";
+                raceTimer.Stop();
+                countDownTimer.Stop();
+                Scene.PauseOrStart();
+                return;
+            } 
             Invalidate();
         }
 
@@ -201,20 +222,21 @@ namespace VP_Proektna
 
         private void label1_Click(object sender, EventArgs e)
         {
-            raceTimer.Stop();
-            countDownTimer.Stop();
-            Scene.PauseOrStart();
+            
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Continue your previous game!";
+            saveFileDialog.Title = "Save your game!";
             if(saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 FileStream fs = new FileStream(saveFileDialog.FileName,FileMode.Create);
-                IFormatter formatter = new BinaryFormatter();
+                IFormatter formatter = new BinaryFormatter();               
                 formatter.Serialize(fs, Scene);
-                raceTimer.Start();
-                countDownTimer.Start();
-                Scene.PauseOrStart();
+               
             }
+        }
+
+        private void lbCountDown_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

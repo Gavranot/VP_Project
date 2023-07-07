@@ -7,6 +7,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -86,6 +88,7 @@ namespace VP_Proektna
             if(openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open);
+                IFormatter formatter = new BinaryFormatter();
                 GameSceneForm continued = new GameSceneForm(fs);
                 continued.ShowDialog();
             }

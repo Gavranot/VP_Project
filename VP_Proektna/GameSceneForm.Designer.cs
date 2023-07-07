@@ -54,6 +54,7 @@
             this.lbCountDown.Size = new System.Drawing.Size(289, 63);
             this.lbCountDown.TabIndex = 5;
             this.lbCountDown.Text = "RACE IN 3";
+            this.lbCountDown.Click += new System.EventHandler(this.lbCountDown_Click);
             // 
             // statusStrip1
             // 

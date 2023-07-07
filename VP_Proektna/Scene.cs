@@ -18,7 +18,8 @@ namespace VP_Proektna
         public static int Width { get; set; }
         public static int Height { get; set; }
 
-
+        public String PlayerPath { get; set; }
+        public List<String> carPaths { get; set; }
 
         public bool IsPaused { get; set; } = true;
 
@@ -70,13 +71,55 @@ namespace VP_Proektna
 
         }
 
-        public void MoveOpponenets()
+        public void MoveOpponenets(bool swerve)
         {
-            Console.WriteLine($"Opponents speeds : {LeftSpeed} and {RightSpeed}");
+            //Console.WriteLine($"Opponents speeds : {Left.Speed} and {Right.Speed}");
             if (!IsPaused)
             {
-                Left.MoveUp();
-                Right.MoveUp();
+
+                if (swerve)
+                {
+                    int rand = moveAI.Next(0, 2);
+                    if(rand == 0)
+                    {
+                        for(int i = 0; i<5 && Left.Location.X > 0; i++)
+                        {
+                            Left.OvertakeLeft();
+                        }
+                        
+                    }
+                    else
+                    {
+                        for(int i = 0; i<5 && Left.Location.X < Width; i++)
+                        {
+                            Left.OvertakeRight();
+                        }
+                       
+                    }
+                    rand = moveAI.Next(0, 2);
+                    if(rand == 0)
+                    {
+                        for(int i = 0; i<5 && Right.Location.X > 0; i++)
+                        {
+                            Right.OvertakeLeft();
+                        }
+                       
+                    }
+                    else
+                    {
+                        for(int i = 0; i<5 && Right.Location.X < Width; i++)
+                        {
+                            Right.OvertakeRight();
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    Left.MoveUp();
+                    Right.MoveUp();
+                }
+               
             }
         }
 
@@ -98,9 +141,15 @@ namespace VP_Proektna
             RightSpeed = newSpeed;
         }
 
-        public void MovePlayer(KeyEventArgs keyDown)
+        public bool MovePlayer(KeyEventArgs keyDown)
         {
-            Console.WriteLine($"Player speed: {PlayerSpeed}");
+            //Console.WriteLine($"Player speed: {PlayerSpeed}");
+
+            if(Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox))
+            {
+               // Console.WriteLine("Collision!");
+                return true;
+            }
 
             if(!IsPaused)
             {
@@ -121,6 +170,7 @@ namespace VP_Proektna
                 
               
             }
+            return false;
             
         }
     }
