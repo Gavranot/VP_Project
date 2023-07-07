@@ -141,7 +141,7 @@ namespace VP_Proektna
             int minutes = timerCounter / 60;          
             int seconds = timerCounter % 60;
 
-            tbRaceTime.Text = $"{minutes}:{seconds}";
+            tbRaceTime.Text = $"{minutes:00}:{seconds:00}";
 
             if ((isUpPressed || isLeftPressed || isRightPressed) && Scene.Player.Speed < MAX_SPEED)
             {               
