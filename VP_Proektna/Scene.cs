@@ -82,12 +82,12 @@ namespace VP_Proektna
            
             if (!IsPaused)
             {
-
-                if (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox) && !Player.IsFinished)
+                if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
                 {
                     // Console.WriteLine("Collision!");
                     return true;
                 }
+
                 if (swerve)
                 {
                     int rand = moveAI.Next(0, 2);
@@ -95,14 +95,24 @@ namespace VP_Proektna
                     {
                         for(int i = 0; i<5 && Left.Location.X > Left.Speed*2; i++)
                         {
+                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                            {
+                                // Console.WriteLine("Collision!");
+                                return true;
+                            }
                             Left.OvertakeLeft();
                         }
                         
                     }
                     else
                     {
-                        for(int i = 0; i<5 && Left.Location.X < Width+Left.Speed*2; i++)
+                        for(int i = 0; i<5 && Left.Location.X < Width-Left.Speed*2; i++)
                         {
+                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                            {
+                                // Console.WriteLine("Collision!");
+                                return true;
+                            }
                             Left.OvertakeRight();
                         }
                        
@@ -112,14 +122,24 @@ namespace VP_Proektna
                     {
                         for(int i = 0; i<5 && Right.Location.X > Right.Speed*2; i++)
                         {
+                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                            {
+                                // Console.WriteLine("Collision!");
+                                return true;
+                            }
                             Right.OvertakeLeft();
                         }
                        
                     }
                     else
                     {
-                        for(int i = 0; i<5 && Right.Location.X < Width + Right.Speed*2; i++)
+                        for(int i = 0; i<5 && Right.Location.X < Width - Right.Speed*2; i++)
                         {
+                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                            {
+                                // Console.WriteLine("Collision!");
+                                return true;
+                            }
                             Right.OvertakeRight();
                         }
                         
@@ -173,13 +193,13 @@ namespace VP_Proektna
         {
             //Console.WriteLine($"Player speed: {PlayerSpeed}");
 
-            if(Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox) && !Player.IsFinished)
+            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
             {
-               // Console.WriteLine("Collision!");
+                // Console.WriteLine("Collision!");
                 return true;
             }
 
-            if(!IsPaused)
+            if (!IsPaused)
             {
               
                 

@@ -23,7 +23,11 @@ namespace VP_Proektna
         public Rectangle hitBox { get; set; }   
 
 
+<<<<<<< HEAD
         public static int NUM_ROUNDS { get; set; } = 6;
+=======
+        public static int NUM_ROUNDS { get; set; } = 3;
+>>>>>>> 1d90f861678b23bdac4d8980fc1e8adc2271a505
         public int Round { get; set; } = 1;
         public bool IsFinished { get; set; } = false;
         public int FinishTime { get; set; } = 0;
