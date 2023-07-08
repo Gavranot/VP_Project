@@ -28,6 +28,8 @@ namespace VP_Proektna
                 carImagePaths.Add(@"../../Resources/" + carNames[i] + ".png");
             }
             currIndex = 0;
+
+            this.BackgroundImageLayout = ImageLayout.Stretch;
             
         }
 

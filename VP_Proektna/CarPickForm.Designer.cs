@@ -42,30 +42,32 @@
             // 
             // btnLeft
             // 
-            this.btnLeft.Location = new System.Drawing.Point(16, 241);
+            this.btnLeft.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLeft.Location = new System.Drawing.Point(175, 361);
             this.btnLeft.Margin = new System.Windows.Forms.Padding(4);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(100, 28);
             this.btnLeft.TabIndex = 1;
             this.btnLeft.Text = "<<";
-            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.UseVisualStyleBackColor = false;
             this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
             // 
             // btnRight
             // 
-            this.btnRight.Location = new System.Drawing.Point(420, 241);
+            this.btnRight.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnRight.Location = new System.Drawing.Point(530, 361);
             this.btnRight.Margin = new System.Windows.Forms.Padding(4);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(100, 28);
             this.btnRight.TabIndex = 2;
             this.btnRight.Text = ">>";
-            this.btnRight.UseVisualStyleBackColor = true;
+            this.btnRight.UseVisualStyleBackColor = false;
             this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
             // 
             // pbPickCar
             // 
             this.pbPickCar.BackColor = System.Drawing.Color.Black;
-            this.pbPickCar.Location = new System.Drawing.Point(205, 146);
+            this.pbPickCar.Location = new System.Drawing.Point(338, 263);
             this.pbPickCar.Margin = new System.Windows.Forms.Padding(4);
             this.pbPickCar.Name = "pbPickCar";
             this.pbPickCar.Size = new System.Drawing.Size(133, 223);
@@ -75,19 +77,23 @@
             // 
             // btnChoose
             // 
+            this.btnChoose.BackColor = System.Drawing.Color.DarkTurquoise;
             this.btnChoose.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnChoose.Location = new System.Drawing.Point(175, 402);
+            this.btnChoose.Location = new System.Drawing.Point(308, 536);
             this.btnChoose.Margin = new System.Windows.Forms.Padding(4);
             this.btnChoose.Name = "btnChoose";
-            this.btnChoose.Size = new System.Drawing.Size(189, 98);
+            this.btnChoose.Size = new System.Drawing.Size(189, 40);
             this.btnChoose.TabIndex = 3;
             this.btnChoose.Text = "Choose!";
-            this.btnChoose.UseVisualStyleBackColor = true;
+            this.btnChoose.UseVisualStyleBackColor = false;
             this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(120, 94);
+            this.tbName.BackColor = System.Drawing.Color.Thistle;
+            this.tbName.Font = new System.Drawing.Font("MV Boli", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.tbName.Location = new System.Drawing.Point(238, 127);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(332, 33);
             this.tbName.TabIndex = 4;
@@ -98,10 +104,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MV Boli", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(146, 65);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Tempus Sans ITC", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.PaleTurquoise;
+            this.label1.Location = new System.Drawing.Point(267, 98);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(269, 26);
+            this.label1.Size = new System.Drawing.Size(254, 26);
             this.label1.TabIndex = 5;
             this.label1.Text = "Внесете го вашето име";
             // 
@@ -113,7 +121,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 554);
+            this.BackgroundImage = global::VP_Proektna.Properties.Resources.background;
+            this.ClientSize = new System.Drawing.Size(822, 793);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.btnChoose);

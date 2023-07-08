@@ -134,6 +134,11 @@ namespace VP_Proektna
                 {
                     FinishedCars.Push(Right);
                 }
+
+                if (Player.IsFinished)
+                {
+                    FinishedCars.Push(Player);
+                }
             }
         }
 
@@ -181,12 +186,6 @@ namespace VP_Proektna
                     {
                         Player.OvertakeRight();
                     }
-
-
-                if (Player.IsFinished)
-                {
-                    FinishedCars.Push(Player);
-                }
               
             }
             return false;

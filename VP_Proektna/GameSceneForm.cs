@@ -30,6 +30,8 @@ namespace VP_Proektna
         public bool isLeftPressed { get; set; } = false;
         public bool isRightPressed { get; set; } = false;
 
+        public bool IsSoundOn { get; set; } = true;
+
 
         public GameSceneForm(String playerCar, List<String> carPaths, String playerName)
         {
@@ -277,6 +279,26 @@ namespace VP_Proektna
             GameSceneForm form = new GameSceneForm(playerCar, carPaths, Scene.Player.Name);
             form.ShowDialog();
             this.Close();
+        }
+
+        private void soundOffToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IsSoundOn = !IsSoundOn;
+            ConfigureSound();
+        }
+
+        private void ConfigureSound()
+        {
+            if (IsSoundOn)
+            {
+                HomeForm.Player.PlayLooping();
+                soundOffToolStripMenuItem.Text = "Sound off";
+            }
+            else
+            {
+                HomeForm.Player.Stop();
+                soundOffToolStripMenuItem.Text = "Sound on";
+            }
         }
     }
 }
