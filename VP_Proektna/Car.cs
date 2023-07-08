@@ -23,7 +23,7 @@ namespace VP_Proektna
         public Rectangle hitBox { get; set; }   
 
 
-        public static int NUM_ROUNDS { get; set; } = 3;
+        public static int NUM_ROUNDS { get; set; } = 1;
         public int Round { get; set; } = 1;
         public bool IsFinished { get; set; } = false;
         public int FinishTime { get; set; } = 0;
@@ -50,15 +50,17 @@ namespace VP_Proektna
 
         public void MoveUp(int timeCounter)
         {
-            //Console.WriteLine($"Car: {ImagePath}, Speed : {Speed}");
+           
             if(Round == NUM_ROUNDS + 1)
             {
                 if (!IsFinished)
                 {
+                    Console.WriteLine($"Car: {ImagePath}, Time : {timeCounter}");
                     IsFinished = true;
                     Location = new Point(Location.X, Scene.Height - Image.Height - 10);
 
                     FinishTime = timeCounter;
+                   
                 }              
             }
             else

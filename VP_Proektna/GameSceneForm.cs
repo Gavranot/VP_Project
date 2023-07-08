@@ -156,7 +156,34 @@ namespace VP_Proektna
             }
 
             Scene.PauseOrStart();
-            Scene.MoveOpponenets(swerve, countDownCounter);
+            
+            bool check = Scene.MoveOpponenets(swerve, Scene.timerCounter);
+            if (check == true)
+            {
+                lbCountDown.Show();
+                lbCountDown.Text = "Game over!";
+                lbCountDown.BackColor = Color.Red;
+                raceTimer.Stop();
+                countDownTimer.Stop();
+                Scene.PauseOrStart();
+
+                DialogResult result = MessageBox.Show("Имаше судар со противникот :( \n Дали сакаш да почнеш од почеток?",
+                    "ИГРАТА ЗАВРШИ",
+                    MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    String playerCar = this.playerCar;
+                    List<String> carPaths = this.carPaths;
+                    String name = Scene.Player.Name;
+                    this.Hide();
+                    GameSceneForm form = new GameSceneForm(playerCar, carPaths, name);
+                    form.ShowDialog();
+                    this.Close();
+                }
+
+                return;
+            }
             Invalidate();
 
             String winnersStatus = Scene.FinishGame();

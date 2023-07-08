@@ -76,18 +76,24 @@ namespace VP_Proektna
 
         }
 
-        public void MoveOpponenets(bool swerve, int timeCounter)
+        public bool MoveOpponenets(bool swerve, int timeCounter)
         {
             //Console.WriteLine($"Opponents speeds : {Left.Speed} and {Right.Speed}");
+           
             if (!IsPaused)
             {
 
+                if (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox) && !Player.IsFinished)
+                {
+                    // Console.WriteLine("Collision!");
+                    return true;
+                }
                 if (swerve)
                 {
                     int rand = moveAI.Next(0, 2);
                     if(rand == 0)
                     {
-                        for(int i = 0; i<5 && Left.Location.X > 0; i++)
+                        for(int i = 0; i<5 && Left.Location.X > Left.Speed*2; i++)
                         {
                             Left.OvertakeLeft();
                         }
@@ -95,7 +101,7 @@ namespace VP_Proektna
                     }
                     else
                     {
-                        for(int i = 0; i<5 && Left.Location.X < Width; i++)
+                        for(int i = 0; i<5 && Left.Location.X < Width+Left.Speed*2; i++)
                         {
                             Left.OvertakeRight();
                         }
@@ -104,7 +110,7 @@ namespace VP_Proektna
                     rand = moveAI.Next(0, 2);
                     if(rand == 0)
                     {
-                        for(int i = 0; i<5 && Right.Location.X > 0; i++)
+                        for(int i = 0; i<5 && Right.Location.X > Right.Speed*2; i++)
                         {
                             Right.OvertakeLeft();
                         }
@@ -112,7 +118,7 @@ namespace VP_Proektna
                     }
                     else
                     {
-                        for(int i = 0; i<5 && Right.Location.X < Width; i++)
+                        for(int i = 0; i<5 && Right.Location.X < Width + Right.Speed*2; i++)
                         {
                             Right.OvertakeRight();
                         }
@@ -139,7 +145,10 @@ namespace VP_Proektna
                 {
                     FinishedCars.Push(Player);
                 }
+
             }
+            return false;
+
         }
 
         public void UpdatePlayerSpeed(int newSpeed)
@@ -164,7 +173,7 @@ namespace VP_Proektna
         {
             //Console.WriteLine($"Player speed: {PlayerSpeed}");
 
-            if(Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox))
+            if(Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox) && !Player.IsFinished)
             {
                // Console.WriteLine("Collision!");
                 return true;
