@@ -62,14 +62,13 @@ namespace VP_Proektna
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
             Scene = (Scene)formatter.Deserialize(fs);
-            Invalidate();
+            countDownTimer.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+           
             Invalidate();
-
         }
 
         private void countDownTimer_Tick(object sender, EventArgs e)
