@@ -47,9 +47,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackgroundImage = global::VP_Proektna.Properties.Resources.winner1;
             this.ClientSize = new System.Drawing.Size(822, 793);
             this.Controls.Add(this.lbWinners);
+            this.MaximizeBox = false;
             this.Name = "WinnerForm";
             this.Text = "OpponentWinnerForm";
             this.Load += new System.EventHandler(this.OpponentWinnerForm_Load);

@@ -93,6 +93,7 @@
             // 
             // raceTimer
             // 
+            this.raceTimer.Interval = 1000;
             this.raceTimer.Tick += new System.EventHandler(this.raceTimer_Tick);
             // 
             // menuStrip1
@@ -149,6 +150,7 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "GameSceneForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameSceneForm";

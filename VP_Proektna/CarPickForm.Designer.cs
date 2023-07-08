@@ -130,6 +130,7 @@
             this.Controls.Add(this.btnLeft);
             this.Controls.Add(this.pbPickCar);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "CarPickForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CarPickForm";
