@@ -21,6 +21,7 @@ namespace VP_Proektna
         public String PlayerPath { get; set; }
         public List<String> carPaths { get; set; }
         public int timerCounter { get; set; } = 0;
+        public int opponentTimerCounter { get; set; } = 0;  
 
         public bool IsPaused { get; set; } = true;
 
@@ -93,7 +94,7 @@ namespace VP_Proektna
                     int rand = moveAI.Next(0, 2);
                     if(rand == 0)
                     {
-                        for(int i = 0; i<5 && Left.Location.X > Left.Speed*2; i++)
+                        for(int i = 0; i<3 && Left.Location.X > Left.Speed*2; i++)
                         {
                             if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
                             {
@@ -106,7 +107,7 @@ namespace VP_Proektna
                     }
                     else
                     {
-                        for(int i = 0; i<5 && Left.Location.X < Width-Left.Speed*2; i++)
+                        for(int i = 0; i<3 && Left.Location.X < Width-Left.Speed*2; i++)
                         {
                             if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
                             {
@@ -120,7 +121,7 @@ namespace VP_Proektna
                     rand = moveAI.Next(0, 2);
                     if(rand == 0)
                     {
-                        for(int i = 0; i<5 && Right.Location.X > Right.Speed*2; i++)
+                        for(int i = 0; i<3 && Right.Location.X > Right.Speed*2; i++)
                         {
                             if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
                             {
@@ -133,7 +134,7 @@ namespace VP_Proektna
                     }
                     else
                     {
-                        for(int i = 0; i<5 && Right.Location.X < Width - Right.Speed*2; i++)
+                        for(int i = 0; i<3 && Right.Location.X < Width - Right.Speed*2; i++)
                         {
                             if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
                             {

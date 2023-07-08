@@ -24,7 +24,7 @@ namespace VP_Proektna
         Random speedSelector = new Random();
         int countDownCounter = 2; //se koristi i za dvata tamjeri bidejki se nezavisni  eden od drug       
         public static int MIN_SPEED { get; set; } = 1;
-        public static int MAX_SPEED { get; set; } = 15;
+        public static int MAX_SPEED { get; set; } = 2;
 
         public bool isUpPressed { get; set; } = false;
         public bool isLeftPressed { get; set; } = false;
@@ -65,6 +65,7 @@ namespace VP_Proektna
 
             Scene = (Scene)formatter.Deserialize(fs);
             raceTimer.Start();
+            
 
         }
 
@@ -98,6 +99,7 @@ namespace VP_Proektna
                 lbCountDown.Hide();
                 countDownTimer.Stop();
                 raceTimer.Start();
+                CarMove.Start();
             }
         }
 
@@ -110,86 +112,16 @@ namespace VP_Proektna
         {
             Scene.timerCounter++;
 
-            
-            if(Scene.timerCounter%5 == 0)
-            {
-                
-                int select = speedSelector.Next(0, 50);
-               
-                if (select >= 25)
-                {
-                    if(Scene.Left.Speed < MAX_SPEED)
-                    {
-                        Scene.UpdateLeftOpponentSpeed(Scene.Left.Speed + speedSelector.Next(1, 4));
-                    }
-                   
-                }
-                else
-                {
-                    if(Scene.Right.Speed < MAX_SPEED)
-                    {
-                        Scene.UpdateRightOpponentSpeed(Scene.Right.Speed + speedSelector.Next(1, 4));
-                    }
-                    
-                }
-                
-            }
-
             int minutes = Scene.timerCounter / 60;          
             int seconds = Scene.timerCounter % 60;
 
             tbRaceTime.Text = $"{minutes:00}:{seconds:00}";
 
-            if ((isUpPressed || isLeftPressed || isRightPressed) && Scene.Player.Speed < MAX_SPEED)
-            {               
-                int newSpeed = Scene.PlayerSpeed += 1;
-                Scene.UpdatePlayerSpeed(newSpeed);
-            }else if((!isUpPressed && !isLeftPressed && !isRightPressed) && Scene.Player.Speed > MIN_SPEED)
-            {
-                int newSpeed = Scene.PlayerSpeed -= 2;
-                Scene.UpdatePlayerSpeed(newSpeed);
-            }
-            bool swerve = false;
-            if (speedSelector.Next(0, 50) >= 38)
-            {
-                swerve = true;
-            }
-
-            Scene.PauseOrStart();
-            
-            bool check = Scene.MoveOpponenets(swerve, Scene.timerCounter);
-            if (check == true)
-            {
-                lbCountDown.Show();
-                lbCountDown.Text = "Game over!";
-                lbCountDown.BackColor = Color.Red;
-                raceTimer.Stop();
-                countDownTimer.Stop();
-                Scene.PauseOrStart();
-
-                DialogResult result = MessageBox.Show("Имаше судар со противникот :( \n Дали сакаш да почнеш од почеток?",
-                    "ИГРАТА ЗАВРШИ",
-                    MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
-                {
-                    String playerCar = this.playerCar;
-                    List<String> carPaths = this.carPaths;
-                    String name = Scene.Player.Name;
-                    this.Hide();
-                    GameSceneForm form = new GameSceneForm(playerCar, carPaths, name);
-                    form.ShowDialog();
-                    this.Close();
-                }
-
-                return;
-            }
-            Invalidate();
-
             String winnersStatus = Scene.FinishGame();
             if (!winnersStatus.Equals(""))
             {
                 raceTimer.Stop();
+                CarMove.Stop();
                 this.Hide();
                 WinnerForm form = new WinnerForm(winnersStatus);
                 form.ShowDialog();
@@ -234,6 +166,7 @@ namespace VP_Proektna
                 lbCountDown.BackColor = Color.Red;
                 raceTimer.Stop();
                 countDownTimer.Stop();
+                CarMove.Stop();
                 Scene.PauseOrStart();
 
                 DialogResult result = MessageBox.Show("Имаше судар со противникот :( \n Дали сакаш да почнеш од почеток?", 
@@ -326,6 +259,89 @@ namespace VP_Proektna
                 HomeForm.Player.Stop();
                 soundOffToolStripMenuItem.Text = "Sound on";
             }
+        }
+
+        private void OpponentTImer_Tick(object sender, EventArgs e)
+        {
+
+            Console.WriteLine($"Opponents: {Scene.Left.Speed} and {Scene.Right.Speed}");
+            Scene.opponentTimerCounter++;
+            if (Scene.opponentTimerCounter % 5 == 0)
+            {
+                int select = speedSelector.Next(0, 50);
+
+                if (select >= 25)
+                {
+                    if (Scene.Left.Speed < MAX_SPEED)
+                    {
+                        Scene.UpdateLeftOpponentSpeed(Scene.Left.Speed + speedSelector.Next(1, 5));
+                    }
+
+                }
+                else
+                {
+                    if (Scene.Right.Speed < MAX_SPEED)
+                    {
+                        Scene.UpdateRightOpponentSpeed(Scene.Right.Speed + speedSelector.Next(1, 5));
+                    }
+
+                }
+
+            }
+
+
+            if ((isUpPressed || isLeftPressed || isRightPressed) && Scene.Player.Speed < MAX_SPEED)
+            {
+                int newSpeed = Scene.PlayerSpeed += 1;
+                Scene.UpdatePlayerSpeed(newSpeed);
+            }
+            else if ((!isUpPressed && !isLeftPressed && !isRightPressed) && Scene.Player.Speed > MIN_SPEED)
+            {
+                int newSpeed = Scene.PlayerSpeed -= 2;
+                Scene.UpdatePlayerSpeed(newSpeed);
+            }
+
+
+
+            bool swerve = false;
+            if (speedSelector.Next(0, 50) >= 38)
+            {
+                swerve = true;
+            }
+
+            Scene.PauseOrStart();
+
+            bool check = Scene.MoveOpponenets(swerve, Scene.timerCounter);
+            if (check == true)
+            {
+                lbCountDown.Show();
+                lbCountDown.Text = "Game over!";
+                lbCountDown.BackColor = Color.Red;
+                raceTimer.Stop();
+                CarMove.Stop();
+                countDownTimer.Stop();
+                Scene.PauseOrStart();
+
+                DialogResult result = MessageBox.Show("Имаше судар со противникот :( \n Дали сакаш да почнеш од почеток?",
+                    "ИГРАТА ЗАВРШИ",
+                    MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    String playerCar = this.playerCar;
+                    List<String> carPaths = this.carPaths;
+                    String name = Scene.Player.Name;
+                    this.Hide();
+                    GameSceneForm form = new GameSceneForm(playerCar, carPaths, name);
+                    form.ShowDialog();
+                    this.Close();
+                }
+
+                return;
+            }
+            Invalidate();
+
+
         }
     }
 }

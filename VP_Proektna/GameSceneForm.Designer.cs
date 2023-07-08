@@ -39,6 +39,7 @@
             this.saveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startOverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.soundOffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CarMove = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +54,7 @@
             this.lbCountDown.AutoSize = true;
             this.lbCountDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 40.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCountDown.ForeColor = System.Drawing.Color.Transparent;
-            this.lbCountDown.Location = new System.Drawing.Point(138, 288);
+            this.lbCountDown.Location = new System.Drawing.Point(167, 289);
             this.lbCountDown.Name = "lbCountDown";
             this.lbCountDown.Size = new System.Drawing.Size(289, 63);
             this.lbCountDown.TabIndex = 5;
@@ -137,6 +138,10 @@
             this.soundOffToolStripMenuItem.Text = "Sound off";
             this.soundOffToolStripMenuItem.Click += new System.EventHandler(this.soundOffToolStripMenuItem_Click);
             // 
+            // CarMove
+            // 
+            this.CarMove.Tick += new System.EventHandler(this.OpponentTImer_Tick);
+            // 
             // GameSceneForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,6 +183,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveGameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem startOverToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem soundOffToolStripMenuItem;
+        private System.Windows.Forms.Timer CarMove;
     }
 }
 
