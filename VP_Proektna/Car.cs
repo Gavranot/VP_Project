@@ -15,24 +15,26 @@ namespace VP_Proektna
     {
         public String ImagePath { get; set; }
         public Image Image { get; set; }
+        public String Name { get; set; }
         public Point Location { get; set; }
         public int Speed { get; set; }
+
 
         public Rectangle hitBox { get; set; }   
 
 
-        public static int NUM_ROUNDS { get; set; } = 6;
+        public static int NUM_ROUNDS { get; set; } = 3;
         public int Round { get; set; } = 1;
         public bool IsFinished { get; set; } = false;
         public int FinishTime { get; set; } = 0;
 
-        public Car(String imagePath, Point location, int speed)
+        public Car(String imagePath, Point location, int speed, String name)
         {
             ImagePath = imagePath;
             Image = new Bitmap(ImagePath);
             Location = location;
             Speed = speed;
-            
+            Name = name;            
         }
 
         public void Draw(Graphics g)
@@ -46,13 +48,18 @@ namespace VP_Proektna
             brush.Dispose();
         }
 
-        public void MoveUp()
+        public void MoveUp(int timeCounter)
         {
-            Console.WriteLine($"Car: {ImagePath}, Speed : {Speed}");
+            //Console.WriteLine($"Car: {ImagePath}, Speed : {Speed}");
             if(Round == NUM_ROUNDS + 1)
             {
-                IsFinished = true;
-                Location = new Point(Location.X, Scene.Height - Image.Height - 10);
+                if (!IsFinished)
+                {
+                    IsFinished = true;
+                    Location = new Point(Location.X, Scene.Height - Image.Height - 10);
+
+                    FinishTime = timeCounter;
+                }              
             }
             else
             {
@@ -62,10 +69,8 @@ namespace VP_Proektna
                     Location = new Point(Location.X, Scene.Height);
                     Round++;
                 }
-            }          
+            }
         }
-
-       
-
+      
     }
 }

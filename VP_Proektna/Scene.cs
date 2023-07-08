@@ -30,6 +30,10 @@ namespace VP_Proektna
 
         public Random moveAI {  get; set; } = new Random();
 
+        public Stack<Car> FinishedCars { get; set; } = new Stack<Car>();
+        public bool AllFinished { get; set; } = false;
+
+
 
         public Scene(int width, int height, int playerSpeed, int leftSpeed, int rightSpeed)
         {
@@ -43,19 +47,19 @@ namespace VP_Proektna
 
        
 
-        public void CreatePlayer(String playerImagePath)
+        public void CreatePlayer(String playerImagePath, String name)
         {
-            Player = new Player(playerImagePath, new Point(3 * Width/7, Height - DISTANCE_FROM_BOTTOM), PlayerSpeed);
+            Player = new Player(playerImagePath, new Point(3 * Width/7, Height - DISTANCE_FROM_BOTTOM), PlayerSpeed, name);
         }
 
-        public void CreateLeftOpponenet(String leftOpponentImagePath)
+        public void CreateLeftOpponenet(String leftOpponentImagePath, String name)
         {
-            Left = new Opponent(leftOpponentImagePath, new Point(Width/7, Height - DISTANCE_FROM_BOTTOM), LeftSpeed);
+            Left = new Opponent(leftOpponentImagePath, new Point(Width/7, Height - DISTANCE_FROM_BOTTOM), LeftSpeed, name);
         }
 
-        public void CreateRightOpponenet(String rightOpponentImagePath)
+        public void CreateRightOpponenet(String rightOpponentImagePath, String name)
         {
-            Right = new Opponent(rightOpponentImagePath, new Point(5 * Width/7, Height - DISTANCE_FROM_BOTTOM), RightSpeed);
+            Right = new Opponent(rightOpponentImagePath, new Point(5 * Width/7, Height - DISTANCE_FROM_BOTTOM), RightSpeed, name);
         }
 
         public void Draw(Graphics g)
@@ -71,7 +75,7 @@ namespace VP_Proektna
 
         }
 
-        public void MoveOpponenets(bool swerve)
+        public void MoveOpponenets(bool swerve, int timeCounter)
         {
             //Console.WriteLine($"Opponents speeds : {Left.Speed} and {Right.Speed}");
             if (!IsPaused)
@@ -116,10 +120,19 @@ namespace VP_Proektna
                 }
                 else
                 {
-                    Left.MoveUp();
-                    Right.MoveUp();
+                    Left.MoveUp(timeCounter);
+                    Right.MoveUp(timeCounter);
                 }
-               
+
+                if (Left.IsFinished)
+                {
+                    FinishedCars.Push(Left);
+                }
+
+                if (Right.IsFinished)
+                {
+                    FinishedCars.Push(Right);
+                }
             }
         }
 
@@ -141,7 +154,7 @@ namespace VP_Proektna
             RightSpeed = newSpeed;
         }
 
-        public bool MovePlayer(KeyEventArgs keyDown)
+        public bool MovePlayer(KeyEventArgs keyDown, int timeCounter)
         {
             //Console.WriteLine($"Player speed: {PlayerSpeed}");
 
@@ -157,7 +170,7 @@ namespace VP_Proektna
                 
                     if (keyDown.KeyCode == Keys.Up)
                     {
-                        Player.MoveUp();
+                        Player.MoveUp(timeCounter);
                     }
                     else if (keyDown.KeyCode == Keys.Left)
                     {
@@ -167,11 +180,34 @@ namespace VP_Proektna
                     {
                         Player.OvertakeRight();
                     }
-                
+
+
+                if (Player.IsFinished)
+                {
+                    FinishedCars.Push(Player);
+                }
               
             }
             return false;
             
+        }
+
+        public String FinishGame()
+        {
+            AllFinished = Player.IsFinished && Left.IsFinished && Right.IsFinished;
+
+            StringBuilder sb = new StringBuilder();
+
+            if (AllFinished)
+            {               
+                for(int i = 1; i <=3; i++)
+                {
+                    Car car = FinishedCars.Pop();
+                    sb.Append($"{i}. {car.Name} {car.FinishTime}\n");
+                }
+            }
+
+            return sb.ToString();
         }
     }
 }

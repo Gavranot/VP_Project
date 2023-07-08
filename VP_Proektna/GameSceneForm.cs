@@ -18,8 +18,8 @@ namespace VP_Proektna
     public partial class GameSceneForm : Form
     {
         public Scene Scene { get; set; }
-        String playerCar { get; set; }
-        List<String> carPaths;
+        public String playerCar { get; set; }
+        public List<String> carPaths { get; set; }
         Random aiCarSelector = new Random();
         Random speedSelector = new Random();
         int timerCounter = 2; //se koristi i za dvata tamjeri bidejki se nezavisni  eden od drug       
@@ -31,15 +31,15 @@ namespace VP_Proektna
         public bool isRightPressed { get; set; } = false;
 
 
-        public GameSceneForm(String playerCar, List<String> carPaths)
+        public GameSceneForm(String playerCar, List<String> carPaths, String playerName)
         {
             InitializeComponent();
             DoubleBuffered = true;
 
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
-            Scene = new Scene(this.Width, this.Height, 
-                1,
+            Scene = new Scene(this.Width, this.Height,
+                speedSelector.Next(MIN_SPEED, MAX_SPEED),
                 speedSelector.Next(MIN_SPEED, MAX_SPEED),
                 speedSelector.Next(MIN_SPEED, MAX_SPEED)
                 );
@@ -49,30 +49,26 @@ namespace VP_Proektna
             Scene.PlayerPath = playerCar;
             Scene.carPaths = carPaths;
 
+            Scene.CreatePlayer(playerCar, playerName);
+            Scene.CreateLeftOpponenet(carPaths[aiCarSelector.Next(0, carPaths.Count)], "Opponent 1");
+            Scene.CreateRightOpponenet(carPaths[aiCarSelector.Next(0, carPaths.Count)], "Opponent 2");
+
             countDownTimer.Start();
         }
 
-        public GameSceneForm(FileStream fs) {
+        public GameSceneForm(IFormatter formatter, FileStream fs) {
             InitializeComponent();
             DoubleBuffered = true;
             this.BackgroundImageLayout = ImageLayout.Stretch;
-            IFormatter formatter = new BinaryFormatter();
+
             Scene = (Scene)formatter.Deserialize(fs);
-            this.playerCar = Scene.PlayerPath;
-            this.carPaths = Scene.carPaths;
             Invalidate();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Scene.CreatePlayer(playerCar);
-            Scene.CreateLeftOpponenet(carPaths[aiCarSelector.Next(0, carPaths.Count)]);
-            Scene.CreateRightOpponenet(carPaths[aiCarSelector.Next(0, carPaths.Count)]);
+            
             Invalidate();
-
- //           pbPlayer.ImageLocation = playerCar;
- //           pbOpponent1.ImageLocation = carPaths[aiCarSelector.Next(0, carPaths.Count)];
- //           pbOpponent2.ImageLocation = carPaths[aiCarSelector.Next(0, carPaths.Count)];
 
         }
 
@@ -159,8 +155,18 @@ namespace VP_Proektna
             }
 
             Scene.PauseOrStart();
-            Scene.MoveOpponenets(swerve);
+            Scene.MoveOpponenets(swerve, timerCounter);
             Invalidate();
+
+            String winnersStatus = Scene.FinishGame();
+            if (!winnersStatus.Equals(""))
+            {
+                raceTimer.Stop();
+                this.Hide();
+                WinnerForm form = new WinnerForm(winnersStatus);
+                form.ShowDialog();
+                this.Close();
+            }
         }
 
         private void lbPauseGame_Click(object sender, EventArgs e)
@@ -192,16 +198,34 @@ namespace VP_Proektna
             {
                 isRightPressed = true;
             }
-            bool check = Scene.MovePlayer(e);
+            bool check = Scene.MovePlayer(e, timerCounter);
             if(check == true)
             {
                 lbCountDown.Show();
                 lbCountDown.Text = "Game over!";
+                lbCountDown.BackColor = Color.Red;
                 raceTimer.Stop();
                 countDownTimer.Stop();
                 Scene.PauseOrStart();
+
+                DialogResult result = MessageBox.Show("Имаше судар со противникот :( \n Дали сакаш да почнеш од почеток?", 
+                    "ИГРАТА ЗАВРШИ", 
+                    MessageBoxButtons.YesNo);
+
+               if(result == DialogResult.Yes)
+                {
+                    String playerCar = this.playerCar;
+                    List<String> carPaths = this.carPaths;
+                    String name = Scene.Player.Name;
+                    this.Hide();
+                    GameSceneForm form = new GameSceneForm(playerCar, carPaths, name); 
+                    form.ShowDialog();
+                    this.Close();
+                }
+
                 return;
-            } 
+            }
+
             Invalidate();
         }
 
@@ -223,20 +247,37 @@ namespace VP_Proektna
         private void label1_Click(object sender, EventArgs e)
         {
             
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Save your game!";
-            if(saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                FileStream fs = new FileStream(saveFileDialog.FileName,FileMode.Create);
-                IFormatter formatter = new BinaryFormatter();               
-                formatter.Serialize(fs, Scene);
-               
-            }
         }
 
         private void lbCountDown_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            raceTimer.Stop();
+            this.Hide();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Save your game!";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.OpenOrCreate);
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(fs, Scene);
+
+            }
+            this.Close();
+        }
+
+        private void startOverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String playerCar = this.playerCar;
+            List<String> carPaths = this.carPaths;
+            this.Hide();
+            GameSceneForm form = new GameSceneForm(playerCar, carPaths, Scene.Player.Name);
+            form.ShowDialog();
+            this.Close();
         }
     }
 }

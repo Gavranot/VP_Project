@@ -89,8 +89,10 @@ namespace VP_Proektna
             {
                 FileStream fs = new FileStream(openFileDialog.FileName, FileMode.Open);
                 IFormatter formatter = new BinaryFormatter();
-                GameSceneForm continued = new GameSceneForm(fs);
+                this.Hide();
+                GameSceneForm continued = (GameSceneForm)formatter.Deserialize(fs);
                 continued.ShowDialog();
+                this.Close();
             }
         }
 

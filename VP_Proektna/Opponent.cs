@@ -12,7 +12,7 @@ namespace VP_Proektna
     [Serializable]
     public class Opponent : Car
     {
-        public Opponent(string imagePath, Point location, int speed) : base(imagePath, location, speed)
+        public Opponent(string imagePath, Point location, int speed, string name) : base(imagePath, location, speed, name)
         {
         }
 

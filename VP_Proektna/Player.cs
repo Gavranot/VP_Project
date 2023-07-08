@@ -11,7 +11,7 @@ namespace VP_Proektna
     [Serializable]
     public class Player : Car
     {
-        public Player(string imagePath, Point location, int speed) : base(imagePath, location, speed)
+        public Player(string imagePath, Point location, int speed, string name) : base(imagePath, location, speed, name)
         {
         }
 

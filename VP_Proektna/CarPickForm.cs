@@ -15,6 +15,7 @@ namespace VP_Proektna
         List<String> carImagePaths;
         int currIndex;
         public String selectedCar;
+        String playerName;
 
         public CarPickForm()
         {
@@ -71,10 +72,33 @@ namespace VP_Proektna
         private void btnChoose_Click(object sender, EventArgs e)
         {
             selectedCar = carImagePaths[currIndex];
-            this.Hide();
-            GameSceneForm gameSceneForm = new GameSceneForm(selectedCar, carImagePaths);
-            gameSceneForm.ShowDialog();
-            this.Close();
+            if (ValidateChildren())
+            {
+                this.Hide();
+                GameSceneForm gameSceneForm = new GameSceneForm(selectedCar, carImagePaths, playerName);
+                gameSceneForm.ShowDialog();
+                this.Close();
+            }
+        }
+
+
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+            playerName = tbName.Text;
+        }
+
+        private void tbName_Validating(object sender, CancelEventArgs e)
+        {
+            if(tbName.Text.Equals(""))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(tbName, "Полето не смее да биде празно!");
+            }
+            else
+            {
+                errorProvider1.SetError(tbName, null);
+            }
         }
     }
 }
