@@ -140,6 +140,7 @@
             // 
             // CarMove
             // 
+            this.CarMove.Interval = 25;
             this.CarMove.Tick += new System.EventHandler(this.OpponentTImer_Tick);
             // 
             // GameSceneForm
@@ -154,7 +155,7 @@
             this.Controls.Add(this.lbCountDown);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "GameSceneForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -24,7 +24,7 @@ namespace VP_Proektna
         Random speedSelector = new Random();
         int countDownCounter = 2; //se koristi i za dvata tamjeri bidejki se nezavisni  eden od drug       
         public static int MIN_SPEED { get; set; } = 1;
-        public static int MAX_SPEED { get; set; } = 2;
+        public static int MAX_SPEED { get; set; } = 8;
 
         public bool isUpPressed { get; set; } = false;
         public bool isLeftPressed { get; set; } = false;
@@ -41,10 +41,10 @@ namespace VP_Proektna
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
             Scene = new Scene(this.Width, this.Height,
+                2,
                 speedSelector.Next(MIN_SPEED, MAX_SPEED),
                 speedSelector.Next(MIN_SPEED, MAX_SPEED),
-                speedSelector.Next(MIN_SPEED, MAX_SPEED)
-                );
+                MAX_SPEED);
 
             this.playerCar = playerCar;
             this.carPaths = carPaths;
@@ -274,7 +274,7 @@ namespace VP_Proektna
                 {
                     if (Scene.Left.Speed < MAX_SPEED)
                     {
-                        Scene.UpdateLeftOpponentSpeed(Scene.Left.Speed + speedSelector.Next(1, 5));
+                        Scene.UpdateLeftOpponentSpeed(Scene.Left.Speed + 1);
                     }
 
                 }
@@ -282,7 +282,7 @@ namespace VP_Proektna
                 {
                     if (Scene.Right.Speed < MAX_SPEED)
                     {
-                        Scene.UpdateRightOpponentSpeed(Scene.Right.Speed + speedSelector.Next(1, 5));
+                        Scene.UpdateRightOpponentSpeed(Scene.Right.Speed + 1);
                     }
 
                 }
@@ -290,7 +290,7 @@ namespace VP_Proektna
             }
 
 
-            if ((isUpPressed || isLeftPressed || isRightPressed) && Scene.Player.Speed < MAX_SPEED)
+            if ((isUpPressed || isLeftPressed || isRightPressed) && Scene.Player.Speed <= MAX_SPEED + 4)
             {
                 int newSpeed = Scene.PlayerSpeed += 1;
                 Scene.UpdatePlayerSpeed(newSpeed);

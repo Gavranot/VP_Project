@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace VP_Proektna
 {
@@ -28,22 +29,25 @@ namespace VP_Proektna
         public int PlayerSpeed { get; set; }
         public int LeftSpeed { get; set; }
         public int RightSpeed { get; set; }
+
+        public static int MAX_SPEED { get; set; } = 0;
         public static int DISTANCE_FROM_BOTTOM { get; set; } = 100;
 
         public Random moveAI {  get; set; } = new Random();
 
-        public Stack<Car> FinishedCars { get; set; } = new Stack<Car>();
+        public List<Car> FinishedCars { get; set; } = new List<Car>();
         public bool AllFinished { get; set; } = false;
 
 
 
-        public Scene(int width, int height, int playerSpeed, int leftSpeed, int rightSpeed)
+        public Scene(int width, int height, int playerSpeed, int leftSpeed, int rightSpeed, int maxSpeed)
         {
             Width = width;
             Height = height;
             PlayerSpeed = playerSpeed;
             LeftSpeed = leftSpeed;  
             RightSpeed = rightSpeed;
+            MAX_SPEED = maxSpeed;
             Console.WriteLine($"Height: {height}");
         }
 
@@ -152,22 +156,23 @@ namespace VP_Proektna
                     Right.MoveUp(timeCounter);
                 }
 
-                if (Left.IsFinished)
+                if (Left.IsFinished && !FinishedCars.Contains(Left))
                 {
-                    FinishedCars.Push(Left);
+                    FinishedCars.Add(Left);
                 }
 
-                if (Right.IsFinished)
+                if (Right.IsFinished && !FinishedCars.Contains(Right))
                 {
-                    FinishedCars.Push(Right);
+                    FinishedCars.Add(Right);
                 }
 
-                if (Player.IsFinished)
+                if (Player.IsFinished && !FinishedCars.Contains(Player))
                 {
-                    FinishedCars.Push(Player);
+                    FinishedCars.Add(Player);
                 }
 
             }
+           
             return false;
 
         }
@@ -180,14 +185,22 @@ namespace VP_Proektna
 
         public void UpdateLeftOpponentSpeed(int newSpeed)
         {
-            Left.Speed = newSpeed;
-            LeftSpeed = newSpeed;
+            if(Left.Speed <= MAX_SPEED)
+            {
+                Left.Speed = newSpeed;
+                LeftSpeed = newSpeed;
+            }
+            
         }
 
         public void UpdateRightOpponentSpeed(int newSpeed)
         {
-            Right.Speed = newSpeed;
-            RightSpeed = newSpeed;
+            if(Right.Speed <= MAX_SPEED)
+            {
+                Right.Speed = newSpeed;
+                RightSpeed = newSpeed;
+            }
+            
         }
 
         public bool MovePlayer(KeyEventArgs keyDown, int timeCounter)
@@ -222,6 +235,19 @@ namespace VP_Proektna
             
         }
 
+        private static int compareByFinish(Car car1, Car car2)
+        {
+            if(car1.FinishTime > car2.FinishTime)
+            {
+                return 1;
+            }
+            if(car1.FinishTime < car2.FinishTime)
+            {
+                return -1;
+            }
+            return 0;
+        }
+
         public String FinishGame()
         {
             AllFinished = Player.IsFinished && Left.IsFinished && Right.IsFinished;
@@ -229,13 +255,14 @@ namespace VP_Proektna
             StringBuilder sb = new StringBuilder();
 
             if (AllFinished)
-            {               
-                for(int i = 1; i <=3; i++)
+            {
+                FinishedCars.Sort(compareByFinish);
+                for(int i = 0; i <FinishedCars.Count; i++)
                 {
-                    Car car = FinishedCars.Pop();
-                    int minutes = car.FinishTime / 60;
-                    int seconds = car.FinishTime % 60;
-                    sb.Append($"{i}. {car.Name} {minutes:00}:{seconds:00}\n");
+                    
+                    int minutes = FinishedCars[i].FinishTime / 60;
+                    int seconds = FinishedCars[i].FinishTime % 60;
+                    sb.Append($"{i+1}. {FinishedCars[i].Name} {minutes:00}:{seconds:00}\n");
                 }
             }
 
