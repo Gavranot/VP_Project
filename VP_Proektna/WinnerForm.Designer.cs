@@ -37,7 +37,7 @@
             this.lbWinners.BackColor = System.Drawing.Color.Transparent;
             this.lbWinners.Font = new System.Drawing.Font("Snap ITC", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbWinners.ForeColor = System.Drawing.Color.LemonChiffon;
-            this.lbWinners.Location = new System.Drawing.Point(525, 192);
+            this.lbWinners.Location = new System.Drawing.Point(564, 196);
             this.lbWinners.Name = "lbWinners";
             this.lbWinners.Size = new System.Drawing.Size(153, 51);
             this.lbWinners.TabIndex = 0;
@@ -47,6 +47,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackgroundImage = global::VP_Proektna.Properties.Resources.winner1;
             this.ClientSize = new System.Drawing.Size(822, 793);
             this.Controls.Add(this.lbWinners);

@@ -39,6 +39,7 @@ namespace VP_Proektna
             DoubleBuffered = true;
 
             this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.
 
             Scene = new Scene(this.Width, this.Height,
                 speedSelector.Next(MIN_SPEED, MAX_SPEED),

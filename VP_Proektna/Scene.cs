@@ -212,7 +212,9 @@ namespace VP_Proektna
                 for(int i = 1; i <=3; i++)
                 {
                     Car car = FinishedCars.Pop();
-                    sb.Append($"{i}. {car.Name} {car.FinishTime}\n");
+                    int minutes = car.FinishTime / 60;
+                    int seconds = car.FinishTime % 60;
+                    sb.Append($"{i}. {car.Name} {minutes:00}:{seconds:00}\n");
                 }
             }
 

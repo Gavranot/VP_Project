@@ -91,6 +91,8 @@
             this.Controls.Add(this.btnSound);
             this.Controls.Add(this.btnContinueGame);
             this.Controls.Add(this.btnNewGame);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HomeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeForm";

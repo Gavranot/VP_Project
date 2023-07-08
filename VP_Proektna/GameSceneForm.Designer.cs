@@ -147,6 +147,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.lbCountDown);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "GameSceneForm";
