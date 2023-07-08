@@ -22,7 +22,7 @@ namespace VP_Proektna
         public List<String> carPaths { get; set; }
         Random aiCarSelector = new Random();
         Random speedSelector = new Random();
-        int timerCounter = 2; //se koristi i za dvata tamjeri bidejki se nezavisni  eden od drug       
+        int countDownCounter = 2; //se koristi i za dvata tamjeri bidejki se nezavisni  eden od drug       
         public static int MIN_SPEED { get; set; } = 1;
         public static int MAX_SPEED { get; set; } = 15;
 
@@ -62,7 +62,8 @@ namespace VP_Proektna
             this.BackgroundImageLayout = ImageLayout.Stretch;
 
             Scene = (Scene)formatter.Deserialize(fs);
-            countDownTimer.Start();
+            raceTimer.Start();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -73,29 +74,28 @@ namespace VP_Proektna
 
         private void countDownTimer_Tick(object sender, EventArgs e)
         {
-            lbCountDown.Text = $"RACE IN {timerCounter}";
-            if(timerCounter == 2)
+            lbCountDown.Text = $"RACE IN {countDownCounter}";
+            if(countDownCounter == 2)
             {
                 lbCountDown.ForeColor = Color.Orange;
-                timerCounter--;
+                countDownCounter--;
             }
-            else if(timerCounter==1)
+            else if(countDownCounter==1)
             {
                 lbCountDown.ForeColor= Color.Yellow;
-                timerCounter--;
+                countDownCounter--;
             }
-            else if(timerCounter==0)
+            else if(countDownCounter==0)
             {
                 lbCountDown.Text = "GO GO GO!";
                 lbCountDown.ForeColor = Color.Green;              
-                timerCounter--;
+                countDownCounter--;
             }
             else
             {
                 lbCountDown.Hide();
                 countDownTimer.Stop();
                 raceTimer.Start();
-                timerCounter = 0;
             }
         }
 
@@ -106,10 +106,10 @@ namespace VP_Proektna
 
         private void raceTimer_Tick(object sender, EventArgs e)
         {
-            timerCounter++;
+            Scene.timerCounter++;
 
             
-            if(timerCounter%5 == 0)
+            if(Scene.timerCounter%5 == 0)
             {
                 
                 int select = speedSelector.Next(0, 50);
@@ -133,8 +133,8 @@ namespace VP_Proektna
                 
             }
 
-            int minutes = timerCounter / 60;          
-            int seconds = timerCounter % 60;
+            int minutes = Scene.timerCounter / 60;          
+            int seconds = Scene.timerCounter % 60;
 
             tbRaceTime.Text = $"{minutes:00}:{seconds:00}";
 
@@ -154,7 +154,7 @@ namespace VP_Proektna
             }
 
             Scene.PauseOrStart();
-            Scene.MoveOpponenets(swerve, timerCounter);
+            Scene.MoveOpponenets(swerve, countDownCounter);
             Invalidate();
 
             String winnersStatus = Scene.FinishGame();
@@ -197,7 +197,7 @@ namespace VP_Proektna
             {
                 isRightPressed = true;
             }
-            bool check = Scene.MovePlayer(e, timerCounter);
+            bool check = Scene.MovePlayer(e, Scene.timerCounter);
             if(check == true)
             {
                 lbCountDown.Show();

@@ -20,6 +20,7 @@ namespace VP_Proektna
 
         public String PlayerPath { get; set; }
         public List<String> carPaths { get; set; }
+        public int timerCounter { get; set; } = 0;
 
         public bool IsPaused { get; set; } = true;
 
