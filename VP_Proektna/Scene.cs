@@ -96,64 +96,79 @@ namespace VP_Proektna
                 if (swerve)
                 {
                     int rand = moveAI.Next(0, 2);
-                    if(rand == 0)
+                    if (!Left.IsFinished)
                     {
-                        for(int i = 0; i<3 && Left.Location.X > Left.Speed*2; i++)
+                        if (rand == 0)
                         {
-                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                            for (int i = 0; i < 3 && Left.Location.X > Left.Image.Width-20; i++)
                             {
-                                // Console.WriteLine("Collision!");
-                                return true;
+                                if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                                {
+                                    // Console.WriteLine("Collision!");
+                                    return true;
+                                }
+                                Left.OvertakeLeft();
                             }
-                            Left.OvertakeLeft();
+
                         }
-                        
+                        else
+                        {
+                            for (int i = 0; i < 3 && Left.Location.X < Width - Left.Image.Width-20; i++)
+                            {
+                                if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                                {
+                                    // Console.WriteLine("Collision!");
+                                    return true;
+                                }
+                                Left.OvertakeRight();
+                            }
+
+                        }
                     }
-                    else
+
+                    if (!Right.IsFinished)
                     {
-                        for(int i = 0; i<3 && Left.Location.X < Width-Left.Speed*2; i++)
+                        rand = moveAI.Next(0, 2);
+                        if (rand == 0)
                         {
-                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                            for (int i = 0; i < 3 && Right.Location.X > Right.Image.Width-20 * 2; i++)
                             {
-                                // Console.WriteLine("Collision!");
-                                return true;
+                                if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                                {
+                                    // Console.WriteLine("Collision!");
+                                    return true;
+                                }
+                                Right.OvertakeLeft();
                             }
-                            Left.OvertakeRight();
+
                         }
-                       
-                    }
-                    rand = moveAI.Next(0, 2);
-                    if(rand == 0)
-                    {
-                        for(int i = 0; i<3 && Right.Location.X > Right.Speed*2; i++)
+                        else
                         {
-                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                            for (int i = 0; i < 3 && Right.Location.X < Width - Right.Image.Width-20; i++)
                             {
-                                // Console.WriteLine("Collision!");
-                                return true;
+                                if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
+                                {
+                                    // Console.WriteLine("Collision!");
+                                    return true;
+                                }
+                                Right.OvertakeRight();
                             }
-                            Right.OvertakeLeft();
+
                         }
-                       
                     }
-                    else
-                    {
-                        for(int i = 0; i<3 && Right.Location.X < Width - Right.Speed*2; i++)
-                        {
-                            if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
-                            {
-                                // Console.WriteLine("Collision!");
-                                return true;
-                            }
-                            Right.OvertakeRight();
-                        }
-                        
-                    }
+                    
                 }
                 else
                 {
-                    Left.MoveUp(timeCounter);
-                    Right.MoveUp(timeCounter);
+                    if (!Left.IsFinished)
+                    {
+                        Left.MoveUp(timeCounter);
+                    }
+                    if (!Right.IsFinished)
+                    {
+                        Right.MoveUp(timeCounter);
+                    }
+                   
                 }
 
                 if (Left.IsFinished && !FinishedCars.Contains(Left))
@@ -205,7 +220,7 @@ namespace VP_Proektna
 
         public bool MovePlayer(KeyEventArgs keyDown, int timeCounter)
         {
-            //Console.WriteLine($"Player speed: {PlayerSpeed}");
+            Console.WriteLine($"Player location: {Player.Location}");
 
             if (!Player.IsFinished && (Player.hitBox.IntersectsWith(Left.hitBox) || Player.hitBox.IntersectsWith(Right.hitBox)))
             {
@@ -221,11 +236,11 @@ namespace VP_Proektna
                     {
                         Player.MoveUp(timeCounter);
                     }
-                    else if (keyDown.KeyCode == Keys.Left)
+                    else if (keyDown.KeyCode == Keys.Left && Player.Location.X >= Player.Image.Width-20)
                     {
                         Player.OvertakeLeft();
                     }
-                    else if (keyDown.KeyCode == Keys.Right)
+                    else if (keyDown.KeyCode == Keys.Right && Player.Location.X <= Width - Player.Image.Width - 20)
                     {
                         Player.OvertakeRight();
                     }

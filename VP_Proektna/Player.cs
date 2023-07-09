@@ -27,11 +27,11 @@ namespace VP_Proektna
 
         public void OvertakeLeft()
         {
-            Location = new Point(Location.X - Speed, Location.Y - Speed-4);
+            Location = new Point(Location.X - Speed, Location.Y - Speed-5);
         }
         public void OvertakeRight()
         {
-            Location = new Point(Location.X + Speed, Location.Y - Speed-4);
+            Location = new Point(Location.X + Speed, Location.Y - Speed-5);
         }
 
     }

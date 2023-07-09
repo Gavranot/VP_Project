@@ -24,5 +24,18 @@ namespace VP_Proektna
         {
             lbWinners.Text = Status;
         }
+
+        private void lbStartNew_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            CarPickForm cpf = new CarPickForm();
+            cpf.ShowDialog();
+            
+        }
+
+        private void lbExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

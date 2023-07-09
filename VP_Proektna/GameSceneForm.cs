@@ -222,6 +222,7 @@ namespace VP_Proektna
         private void saveGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             raceTimer.Stop();
+            CarMove.Stop();
             this.Hide();
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Save your game!";
@@ -301,7 +302,7 @@ namespace VP_Proektna
             }
             else if ((!isUpPressed && !isLeftPressed && !isRightPressed) && Scene.Player.Speed > MIN_SPEED)
             {
-                int newSpeed = Scene.PlayerSpeed -= 2;
+                int newSpeed = Scene.PlayerSpeed -= 1;
                 Scene.UpdatePlayerSpeed(newSpeed);
             }
 
