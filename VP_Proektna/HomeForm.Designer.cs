@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             this.btnNewGame = new System.Windows.Forms.Button();
             this.btnContinueGame = new System.Windows.Forms.Button();
             this.btnSound = new System.Windows.Forms.Button();
@@ -38,7 +39,7 @@
             // 
             this.btnNewGame.BackColor = System.Drawing.Color.PowderBlue;
             this.btnNewGame.Location = new System.Drawing.Point(238, 397);
-            this.btnNewGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNewGame.Margin = new System.Windows.Forms.Padding(2);
             this.btnNewGame.Name = "btnNewGame";
             this.btnNewGame.Size = new System.Drawing.Size(150, 32);
             this.btnNewGame.TabIndex = 0;
@@ -50,7 +51,7 @@
             // 
             this.btnContinueGame.BackColor = System.Drawing.Color.PowderBlue;
             this.btnContinueGame.Location = new System.Drawing.Point(238, 444);
-            this.btnContinueGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnContinueGame.Margin = new System.Windows.Forms.Padding(2);
             this.btnContinueGame.Name = "btnContinueGame";
             this.btnContinueGame.Size = new System.Drawing.Size(150, 32);
             this.btnContinueGame.TabIndex = 1;
@@ -64,7 +65,7 @@
             this.btnSound.BackColor = System.Drawing.Color.Thistle;
             this.btnSound.BackgroundImage = global::VP_Proektna.Properties.Resources.sound_on;
             this.btnSound.Location = new System.Drawing.Point(555, 10);
-            this.btnSound.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSound.Margin = new System.Windows.Forms.Padding(2);
             this.btnSound.Name = "btnSound";
             this.btnSound.Size = new System.Drawing.Size(52, 49);
             this.btnSound.TabIndex = 3;
@@ -95,7 +96,8 @@
             this.Controls.Add(this.btnSound);
             this.Controls.Add(this.btnContinueGame);
             this.Controls.Add(this.btnNewGame);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "HomeForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

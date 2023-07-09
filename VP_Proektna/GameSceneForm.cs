@@ -65,6 +65,8 @@ namespace VP_Proektna
 
             Scene = (Scene)formatter.Deserialize(fs);
             raceTimer.Start();
+            CarMove.Start();
+            lbCountDown.Hide();
             
 
         }
@@ -136,11 +138,13 @@ namespace VP_Proektna
             {
                 lbPauseGame.Text = "Start";
                 raceTimer.Stop();
+                CarMove.Stop();
             }
             else
             {
                 lbPauseGame.Text = "Stop";
                 raceTimer.Start();
+                CarMove.Start();
             }
         }
 
